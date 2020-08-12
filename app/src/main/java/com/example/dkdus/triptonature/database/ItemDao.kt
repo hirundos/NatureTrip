@@ -1,0 +1,23 @@
+package com.example.dkdus.triptonature.database
+
+import androidx.room.Dao
+import androidx.room.Delete
+import androidx.room.Insert
+import androidx.room.Query
+import com.example.dkdus.triptonature.model.place_material.Item
+
+@Dao
+interface ItemDao {
+
+    @Query("SELECT * FROM Item")
+    fun getAll() : List<Item>
+
+    @Query("SELECT EXISTS(SELECT * FROM Item WHERE title = :string)")
+    fun exist(string: String) : Boolean
+
+    @Insert
+    fun insert(item : Item)
+
+    @Delete
+    fun delete(item : Item)
+}
