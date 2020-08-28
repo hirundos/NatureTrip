@@ -41,8 +41,7 @@ class PlaceDetailActivity : AppCompatActivity() {
         }
 
         Glide.with(this).load(placeItem.mainimage).into(detail_image)
-        detail_tel.text = placeItem.tel
-        detail_telname.text = placeItem.telname
+        detail_loc.text = placeItem.addr
     }
 
 
@@ -67,11 +66,9 @@ class PlaceDetailActivity : AppCompatActivity() {
         GlobalScope.launch(Dispatchers.IO) {
             if(!db.itemDao().exist(item.title.toString()))
             { db.itemDao().insert(item)
-//                Toast.makeText(applicationContext, "토스트 메시지", Toast.LENGTH_SHORT).show()
                 Log.d("삽입","완료")
             }
             else
-//                Toast.makeText(applicationContext, "중복 데이터", Toast.LENGTH_SHORT).show()
                 Log.d("삽입","중복")
         }
 

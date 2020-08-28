@@ -1,11 +1,17 @@
 package com.example.dkdus.triptonature.ui
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentTransaction
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.room.Room
 import com.example.dkdus.triptonature.R
@@ -19,11 +25,8 @@ import kotlinx.coroutines.launch
 
 class PickFragment : Fragment() {
 
-    private val linearLayoutManager by lazy { LinearLayoutManager(context) }
-    lateinit var madapter: MyRecyclerAdapter
-    lateinit var thiscontext : Context
-    lateinit var db : AppDatabase
     var datalist: MutableList<Item> = arrayListOf()
+    lateinit var viewModel : PickViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -31,27 +34,28 @@ class PickFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val root = inflater.inflate(R.layout.fragment_pick, container, false)
-        thiscontext = container?.context!!
         return root
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        db = Room.databaseBuilder(thiscontext.applicationContext, AppDatabase::class.java,"place-db")
-            .build()
+        viewModel = ViewModelProviders.of(this).get(PickViewModel::class.java)
 
-        GlobalScope.launch(Dispatchers.IO) {
-            var items = db.itemDao().getAll()
-            for((index, value) in items.withIndex()){
-                datalist.add(value)
-            }
-        }
-
-        PickRecyclerview.layoutManager = linearLayoutManager
-        madapter = MyRecyclerAdapter(this, datalist){item ->
+        PickRecyclerview.layoutManager = LinearLayoutManager(context)
+        val madapter = MyRecyclerAdapter(this, datalist){item ->
+            val intent : Intent = Intent(context, PlaceDetailActivity::class.java)
+            intent.putExtra("placeData",item)
+            startActivity(intent)
         }
         PickRecyclerview.adapter = madapter
+
+        viewModel.getAll().observe(viewLifecycleOwner, Observer {
+            for((index, value) in it.withIndex()){
+                datalist.add(value)
+            }
+            PickRecyclerview.adapter?.notifyDataSetChanged()
+        })
 
     }
 }

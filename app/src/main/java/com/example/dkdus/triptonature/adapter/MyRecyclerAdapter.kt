@@ -48,6 +48,7 @@ class MyRecyclerAdapter(frag: Fragment, Datalist: MutableList<Item>, val itemCli
     }
 
 
+
     public fun getItem(position: Int) : Item{
         return mDatalist.get(position)
     }
