@@ -18,6 +18,7 @@ import com.example.dkdus.triptonature.R
 import com.example.dkdus.triptonature.adapter.MyRecyclerAdapter
 import com.example.dkdus.triptonature.database.AppDatabase
 import com.example.dkdus.triptonature.model.place_material.Item
+import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.android.synthetic.main.fragment_pick.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
@@ -51,10 +52,7 @@ class PickFragment : Fragment() {
         PickRecyclerview.adapter = madapter
 
         viewModel.getAll().observe(viewLifecycleOwner, Observer {
-            for((index, value) in it.withIndex()){
-                datalist.add(value)
-            }
-            PickRecyclerview.adapter?.notifyDataSetChanged()
+            (PickRecyclerview.adapter as MyRecyclerAdapter).addPost(it)
         })
 
     }

@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.dkdus.triptonature.R
 import com.example.dkdus.triptonature.adapter.MyRecyclerAdapter
 import com.example.dkdus.triptonature.model.Place
@@ -25,6 +26,9 @@ class HomeFragment : Fragment() {
 
     var datalist: MutableList<Item> = mutableListOf()
     lateinit var viewModel: HomeViewModel
+    var page : Int = 1
+    val maxPage = 224
+    var loading = true
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -42,19 +46,42 @@ class HomeFragment : Fragment() {
 
         homeRecyclerview.layoutManager = LinearLayoutManager(context)
 
-        val madapter = MyRecyclerAdapter(this, datalist){ item ->
-            val intent : Intent = Intent(context, PlaceDetailActivity::class.java)
-            intent.putExtra("placeData",item)
+        val madapter = MyRecyclerAdapter(this, datalist) { item ->
+            val intent: Intent = Intent(context, PlaceDetailActivity::class.java)
+            intent.putExtra("placeData", item)
             startActivity(intent)
         }
         homeRecyclerview.adapter = madapter
-        viewModel.call().observe(viewLifecycleOwner, Observer {
-            for((index, value) in it.withIndex()){
-                datalist.add(value)
-            }
-            homeRecyclerview.adapter?.notifyDataSetChanged()
-        })
-
+        (homeRecyclerview.adapter as MyRecyclerAdapter).setLoadingView(true)
+        call()
+        checkScroll()
     }
 
+    private fun call(){
+        (homeRecyclerview.adapter as MyRecyclerAdapter).setLoadingView(false)
+        viewModel.call(page).observe(viewLifecycleOwner, Observer {
+            (homeRecyclerview.adapter as MyRecyclerAdapter).addPost(it)
+            (homeRecyclerview.adapter as MyRecyclerAdapter).setLoadingView(true)
+        })
+    }
+
+    private fun checkScroll() {
+        homeRecyclerview.addOnScrollListener(object : RecyclerView.OnScrollListener(){
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                super.onScrolled(recyclerView, dx, dy)
+                if(!homeRecyclerview.canScrollVertically(1) && hasPage()
+                    ){
+                    page++;
+                    call()
+                }
+            }
+        })
+    }
+
+    private fun hasPage(): Boolean {
+        if(page <= maxPage)
+            return true
+
+        return false
+    }
 }

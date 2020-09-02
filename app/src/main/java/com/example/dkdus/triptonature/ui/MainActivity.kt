@@ -15,38 +15,63 @@ import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemSelectedListener {
 
+    var homeFragment : HomeFragment? = null
+    var pickFragment : PickFragment? = null
+    var settingFragment : SettingFragment? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        homeFragment = HomeFragment()
         supportFragmentManager.beginTransaction()
-            .replace(R.id.nav_host_fragment, HomeFragment())
+            .replace(R.id.frameLayout, homeFragment!!)
             .commitAllowingStateLoss()
 
         nav_view.setOnNavigationItemSelectedListener(this)
     }
 
     override fun onNavigationItemSelected(p0: MenuItem): Boolean {
-        val transaction: FragmentTransaction = supportFragmentManager.beginTransaction()
-
+        val transaction = supportFragmentManager.beginTransaction()
         when(p0.itemId){
             R.id.navigation_home ->{
-                val homeFragment = HomeFragment()
-                transaction.replace(R.id.nav_host_fragment, homeFragment)
+                if(homeFragment == null){
+                    homeFragment = HomeFragment()
+                    transaction.add(R.id.frameLayout, homeFragment!!)
+                }
+                if(homeFragment != null)
+                    transaction.show(homeFragment!!)
+                if(pickFragment != null)
+                    transaction.hide(pickFragment!!)
+                if(settingFragment != null)
+                    transaction.hide(settingFragment!!)
             }
             R.id.navigation_pick -> {
-                val pickFragment = PickFragment()
-                transaction.replace(R.id.nav_host_fragment,pickFragment)
-             }
+                if(pickFragment == null){
+                    pickFragment = PickFragment()
+                    transaction.add(R.id.frameLayout,pickFragment!!)
+                }
+                if(homeFragment != null)
+                    transaction.hide(homeFragment!!)
+                if(pickFragment != null)
+                    transaction.show(pickFragment!!)
+                if(settingFragment != null)
+                    transaction.hide(settingFragment!!)
+            }
             R.id.navigation_setting -> {
-                val settingFragment = SettingFragment()
-                transaction.replace(R.id.nav_host_fragment,settingFragment)
+                if(settingFragment == null){
+                    settingFragment = SettingFragment()
+                    transaction.add(R.id.frameLayout,settingFragment!!)
+                }
+                if(homeFragment != null)
+                     transaction.hide(homeFragment!!)
+                if(pickFragment != null)
+                    transaction.hide(pickFragment!!)
+                if(settingFragment != null)
+                    transaction.show(settingFragment!!)
             }
         }
-        transaction.addToBackStack(null)
-        transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
         transaction.commit()
         return true
     }
-
 }
