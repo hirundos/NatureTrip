@@ -9,12 +9,14 @@ import com.example.dkdus.triptonature.model.place_material.Item
 
 @Dao
 interface ItemDao {
-
     @Query("SELECT * FROM Item")
     fun getAll() : LiveData<MutableList<Item>>
 
     @Query("SELECT EXISTS(SELECT * FROM Item WHERE title = :string)")
     fun exist(string: String) : Boolean
+
+    @Query("SELECT id FROM Item")
+    fun getId() :Int
 
     @Insert
     fun insert(item : Item)

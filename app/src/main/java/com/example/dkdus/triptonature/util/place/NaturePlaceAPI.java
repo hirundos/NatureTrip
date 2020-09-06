@@ -1,4 +1,4 @@
-package com.example.dkdus.triptonature.util;
+package com.example.dkdus.triptonature.util.place;
 
 import com.example.dkdus.triptonature.model.Place;
 

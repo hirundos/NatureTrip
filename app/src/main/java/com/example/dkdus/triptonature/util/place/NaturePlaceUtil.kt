@@ -1,4 +1,4 @@
-package com.example.dkdus.triptonature.util
+package com.example.dkdus.triptonature.util.place
 
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory

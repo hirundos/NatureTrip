@@ -22,11 +22,18 @@
             android:layout_height="match_parent"
             app:srcCompat="@android:drawable/ic_menu_info_details" />
 
-        <EditText
-            android:id="@+id/editSearch"
+        <Spinner
+            android:id="@+id/areaSearch"
             android:layout_width="0dp"
+            android:layout_height="match_parent"
             android:layout_weight="1"
-            android:layout_height="wrap_content" />
+            android:entries="@array/spinner_region"/>
+
+        <Spinner
+            android:id="@+id/detailSearch"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1" />
 
         <ImageButton
             android:id="@+id/button"

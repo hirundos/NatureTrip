@@ -8,6 +8,8 @@ import kotlinx.android.parcel.Parcelize
 @Entity
 @Parcelize
 data class Item(
+    @PrimaryKey(autoGenerate = true)
+    var id : Int,
     var addr: String?,
     var areacode : Int,
     var contentid: String?,
@@ -20,6 +22,4 @@ data class Item(
     var tel: String?,
     var telname: String? ,
     var title: String?
-) : Parcelable{
-    @PrimaryKey(autoGenerate = true) var id : Int = 0
-}
+) : Parcelable
