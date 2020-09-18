@@ -1,4 +1,4 @@
-package com.example.dkdus.triptonature.ui
+package com.example.dkdus.triptonature.ui.main
 
 import android.os.Bundle
 import android.view.LayoutInflater

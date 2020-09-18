@@ -1,4 +1,6 @@
 package com.example.dkdus.triptonature.model.area_material
 
-class Response {
-}
+data class Response(
+    var header: Header,
+    var body: Body
+)

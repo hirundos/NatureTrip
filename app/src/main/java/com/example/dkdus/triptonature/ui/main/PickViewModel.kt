@@ -1,4 +1,4 @@
-package com.example.dkdus.triptonature.ui
+package com.example.dkdus.triptonature.ui.main
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel

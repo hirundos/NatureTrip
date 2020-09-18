@@ -22,6 +22,11 @@
             </intent-filter>
         </activity>
         <activity android:name=".ui.PlaceDetailActivity" />
+
+        <meta-data
+            android:name="com.naver.maps.map.CLIENT_ID"
+            android:value="z0hlvui2rw" />
+
     </application>
 
 </manifest>

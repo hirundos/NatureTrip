@@ -11,12 +11,17 @@ import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
+import androidx.fragment.app.FragmentActivity
 import androidx.room.Room
 import com.bumptech.glide.Glide
 import com.example.dkdus.triptonature.R
 import com.example.dkdus.triptonature.database.AppDatabase
 import com.example.dkdus.triptonature.database.ItemDao
 import com.example.dkdus.triptonature.model.place_material.Item
+import com.naver.maps.map.MapFragment
+import com.naver.maps.map.MapView
+import com.naver.maps.map.NaverMap
+import com.naver.maps.map.OnMapReadyCallback
 import kotlinx.android.synthetic.main.activity_place_detail.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
@@ -97,4 +102,5 @@ class PlaceDetailActivity : AppCompatActivity() {
             startActivity(intent)
         }
     }
+
 }

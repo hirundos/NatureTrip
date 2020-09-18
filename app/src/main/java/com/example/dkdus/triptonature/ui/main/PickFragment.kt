@@ -1,8 +1,7 @@
-package com.example.dkdus.triptonature.ui
+package com.example.dkdus.triptonature.ui.main
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,6 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.dkdus.triptonature.R
 import com.example.dkdus.triptonature.adapter.MyRecyclerAdapter
 import com.example.dkdus.triptonature.model.place_material.Item
+import com.example.dkdus.triptonature.ui.PlaceDetailActivity
 import kotlinx.android.synthetic.main.fragment_pick.*
 
 class PickFragment : Fragment() {
