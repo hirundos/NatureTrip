@@ -57,6 +57,7 @@ class PlaceDetailActivity : AppCompatActivity() {
 
         Glide.with(this).load(placeItem.mainimage).into(detail_image)
         detail_loc.text = placeItem.addr
+        hit.text = "조회수 : "+placeItem.readcount.toString()+"회 "
 
         btn_call.setOnClickListener {
             dialPhoneNumber(placeItem.tel.toString())

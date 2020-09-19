@@ -12,11 +12,6 @@ import com.example.dkdus.triptonature.model.place_material.Item
 class MyRecyclerAdapter(frag: Fragment, Datalist: MutableList<Item>, private val itemClick: (Item)->Unit)
     : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-    companion object{
-        private const val TYPE_ITEM = 0
-        private const val TYPE_LOADING = 1
-    }
-
     private var mDatalist: MutableList<Item?>
     var mfragment : Fragment
 
@@ -29,60 +24,30 @@ class MyRecyclerAdapter(frag: Fragment, Datalist: MutableList<Item>, private val
         this.mDatalist.addAll(Datalist)
         notifyDataSetChanged()
     }
-
-    fun setLoadingView(b : Boolean){
-        if(b){
-            this.mDatalist.add(null)
-            notifyDataSetChanged()
-        }else{
-            if(this.mDatalist[this.mDatalist.size-1] == null ){
-                this.mDatalist.removeAt(this.mDatalist.size -1)
-                notifyItemRemoved(mDatalist.size)
-            }
-        }
-
-    }
-
-    override fun getItemViewType(position: Int): Int {
-        return when(mDatalist[position]){
-            null -> TYPE_LOADING
-            else -> TYPE_ITEM
-        }
+    fun clear(){
+        this.mDatalist.clear()
+        notifyDataSetChanged()
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        when(viewType){
-            TYPE_ITEM ->{
-                val view: View = LayoutInflater.from(parent.context)
-                    .inflate(R.layout.item_main, parent, false)
-                return ItemViewHolder(view, itemClick)
-            }
-            else->{
-                val view: View = LayoutInflater.from(parent.context)
-                    .inflate(R.layout.item_loading, parent, false)
-                return LoadingViewHolder(view)
-            }
-        }
+     val view: View = LayoutInflater.from(parent.context)
+      .inflate(R.layout.item_main, parent, false)
+        return ItemViewHolder(view, itemClick)
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        when(holder.itemViewType){
-            TYPE_ITEM -> {
-                val itemHolder = holder as ItemViewHolder
-                mDatalist.get(position).let { item ->
-                    itemHolder.title.text = item?.title
-                    itemHolder.contents.text = item?.addr
+     val itemHolder = holder as ItemViewHolder
+     mDatalist.get(position).let { item ->
+         itemHolder.title.text = item?.title
+         itemHolder.contents.text = item?.addr
 
-                    if(item?.mainimage == null){
-                        itemHolder.image.setImageResource(R.drawable.ic_launcher_foreground)
-                    } else {
-                        Glide.with(mfragment).load(item?.mainimage).into(itemHolder.image)
-                    }
-                    holder.itemView.setOnClickListener {
-                        holder.itemClick(mDatalist[position]!!)
-                    }
-                }
-            }
+         if(item?.mainimage == null){
+            itemHolder.image.setImageResource(R.drawable.ic_launcher_foreground)
+          }else {
+             Glide.with(mfragment).load(item?.mainimage).into(itemHolder.image)
+          }
+         holder.itemView.setOnClickListener {
+             holder.itemClick(mDatalist[position]!!) }
         }
     }
 

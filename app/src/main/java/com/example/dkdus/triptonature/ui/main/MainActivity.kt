@@ -1,4 +1,4 @@
-package com.example.dkdus.triptonature.ui
+package com.example.dkdus.triptonature.ui.main
 
 import android.os.Bundle
 import android.view.MenuItem
@@ -6,9 +6,6 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.FragmentTransaction
 import com.example.dkdus.triptonature.R
-import com.example.dkdus.triptonature.ui.main.home.HomeFragment
-import com.example.dkdus.triptonature.ui.main.PickFragment
-import com.example.dkdus.triptonature.ui.main.SettingFragment
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemSelectedListener {
