@@ -92,7 +92,7 @@ class HomeFragment : Fragment() {
 
         detailSearch.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-                guAreaCode = position
+                guAreaCode = areaCodeList[position]
             }
             override fun onNothingSelected(parent: AdapterView<*>?) {
             }
