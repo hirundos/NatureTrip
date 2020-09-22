@@ -2,6 +2,7 @@ package com.example.dkdus.triptonature.ui.main
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -26,9 +27,10 @@ class HomeFragment : Fragment() {
     lateinit var arrayAdapter : ArrayAdapter<String>
     var areaCodeList = mutableListOf<Int>()
     var areaNameList = mutableListOf<String>()
-    var sortSelect = arrayListOf<String>("제목순","조회순","수정일순","생성일순")
-    var sortTag = arrayListOf<String>("A","B","C","D")
+    var sortSelect = arrayListOf<String>("제목순", "조회순", "수정일순", "생성일순")
+    var sortTag = arrayListOf<String>("A", "B", "C", "D")
     var sortCode : Int = 1
+    var isGu = false
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -72,14 +74,23 @@ class HomeFragment : Fragment() {
 
     private fun spinnerFun(){
         areaSearch.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
-            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+            override fun onItemSelected(
+                parent: AdapterView<*>?,
+                view: View?,
+                position: Int,
+                id: Long
+            ) {
                 if (position < 9)
                     siAreaCode = position
                 else
                     siAreaCode = position + 22
                 if(siAreaCode > 0){
                     callArea(siAreaCode)
-                    arrayAdapter = ArrayAdapter(context!!, android.R.layout.simple_spinner_item, areaNameList)
+                    arrayAdapter = ArrayAdapter(
+                        context!!,
+                        android.R.layout.simple_spinner_item,
+                        areaNameList
+                    )
                     arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
                     detailSearch.adapter = arrayAdapter
                     guAreaCode = 0
@@ -91,7 +102,12 @@ class HomeFragment : Fragment() {
         }
 
         detailSearch.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
-            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+            override fun onItemSelected(
+                parent: AdapterView<*>?,
+                view: View?,
+                position: Int,
+                id: Long
+            ) {
                 guAreaCode = areaCodeList[position]
             }
             override fun onNothingSelected(parent: AdapterView<*>?) {
@@ -100,18 +116,29 @@ class HomeFragment : Fragment() {
     }
 
     private fun searchPlace(){
-        (homeRecyclerview.adapter as MyRecyclerAdapter).clear()
-        datalist.clear()
+        isGu = false
         callPlace()
+        if (guAreaCode != 0) {
+            val handler = android.os.Handler()
+            handler.postDelayed({
+                (homeRecyclerview.adapter as MyRecyclerAdapter).filter.filter(guAreaCode.toString())
+                isGu = true
+            },1000)
+
+        }
     }
 
-    private fun callPlace(){
-        viewModel.callPlace(siAreaCode, guAreaCode, sortTag[sortCode]).observe(viewLifecycleOwner, Observer {
-            (homeRecyclerview.adapter as MyRecyclerAdapter).addPost(it)
-        })
+    private fun callPlace() {
+        viewModel.callPlace(siAreaCode, sortTag[sortCode])
+            .observe(viewLifecycleOwner, Observer {
+                if(!isGu)
+                {
+                    (homeRecyclerview.adapter as MyRecyclerAdapter).addPost(it)
+                }
+            })
     }
 
-    private fun callArea(areaCode : Int){
+    private fun callArea(areaCode: Int){
         areaCodeList.clear()
         areaNameList.clear()
 
@@ -119,7 +146,7 @@ class HomeFragment : Fragment() {
         areaNameList.add("구 선택")
         viewModel.callArea(areaCode).observe(viewLifecycleOwner, Observer {
             var arr = it.item
-            for(i in arr.indices){
+            for (i in arr.indices) {
                 areaCodeList.add(it.item[i].code)
                 areaNameList.add(it.item[i].name)
             }
