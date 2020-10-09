@@ -32,7 +32,6 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
             R.id.navigation_pick -> {
                 val pickFragment = PickFragment()
                 transaction.replace(R.id.frameLayout,pickFragment)
-                //              transaction.detach(pickFragment).attach(pickFragment)
             }
             R.id.navigation_setting -> {
                 val settingFragment = SettingFragment()

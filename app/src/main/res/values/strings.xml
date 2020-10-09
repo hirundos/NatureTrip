@@ -3,7 +3,6 @@
     <string name="title_home">Home</string>
     <string name="title_dashboard">Like</string>
     <string name="title_notifications">Infomation</string>
-
     <string-array name="spinner_region">
         <item>시 선택</item>
         <item>서울특별시</item>
@@ -24,5 +23,7 @@
         <item>전라남도</item>
         <item>제주도</item>
     </string-array>
+
+    <string name="apiIn">본 앱은 한국관광공사의 생태관광정보 TourAPI와 Naver Map API를 활용하여 개발되었습니다.</string>
 
 </resources>

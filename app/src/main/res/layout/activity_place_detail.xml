@@ -28,8 +28,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/detail_title"
-        app:srcCompat="@mipmap/ic_launcher" />
+        app:srcCompat="@drawable/ic_launcher_foreground" />
 
     <View
         android:layout_width="match_parent"
@@ -96,15 +97,26 @@
         android:background="#E6E6E6"
         app:layout_constraintTop_toBottomOf="@id/menuLinear" />
 
-    <TextView
-        android:id="@+id/loc_text"
-        android:layout_width="match_parent"
+    <ImageView
+        android:id="@+id/loc_icon"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="15dp"
         android:layout_marginTop="20dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/menuLinear"
+        app:srcCompat="@drawable/ic_baseline_location_on_24" />
+
+    <TextView
+        android:id="@+id/loc_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="20dp"
         android:text="위치정보"
         android:textSize="18sp"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintStart_toEndOf="@+id/loc_icon"
         app:layout_constraintTop_toBottomOf="@id/menuLinear" />
 
     <TextView
@@ -130,8 +142,8 @@
         android:id="@+id/detail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="15dp"
-        android:layout_marginRight="15dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
         android:layout_marginTop="40dp"
         android:text="상세정보"
         app:layout_constraintTop_toBottomOf="@id/map"
@@ -152,9 +164,9 @@
         android:id="@+id/detail_summary"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="15dp"
+        android:layout_marginStart="20dp"
         android:layout_marginTop="8dp"
-        android:layout_marginEnd="15dp"
+        android:layout_marginEnd="20dp"
         android:layout_marginBottom="150dp"
         android:text="개요"
         app:layout_constraintBottom_toBottomOf="parent"

@@ -1,6 +1,7 @@
 package com.example.dkdus.triptonature.ui.main
 
 import android.content.Intent
+import android.content.pm.ApplicationInfo
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -60,6 +61,7 @@ class HomeFragment : Fragment() {
         }
         spinnerFun()
         callPlace()
+
     }
 
     private fun textSort(){
