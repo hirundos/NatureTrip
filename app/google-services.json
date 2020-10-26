@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "1083651972175",
+    "firebase_url": "https://naturetrip-9fe23.firebaseio.com",
+    "project_id": "naturetrip-9fe23",
+    "storage_bucket": "naturetrip-9fe23.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1083651972175:android:600e3aaabbaf474de61e3a",
+        "android_client_info": {
+          "package_name": "com.example.dkdus.triptonature"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1083651972175-v4f3i5t86unkvs6u4ns6umk7oab9go49.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.dkdus.triptonature",
+            "certificate_hash": "fdad4bba3de1734308ca2282bf951b76f333f84c"
+          }
+        },
+        {
+          "client_id": "1083651972175-63a59ucku6afljteu1hrpj34dv5n2ieo.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC1CiKld_AJwRZF4991cVHJCkUwKJ1bzuo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1083651972175-63a59ucku6afljteu1hrpj34dv5n2ieo.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

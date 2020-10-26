@@ -58,8 +58,10 @@ class PlaceDetailActivity : AppCompatActivity(), OnMapReadyCallback {
         checkDuplicate(placeItem)
         putData()
         buttonAction()
+
     }
 
+    //주소 -> 좌표 변환
     private fun GeoAddr(){
         var geocode = Geocoder(this)
         var addrList : List<Address> = mutableListOf()
@@ -93,6 +95,7 @@ class PlaceDetailActivity : AppCompatActivity(), OnMapReadyCallback {
         }
     }
 
+    //관광지 정보 보여주기
     private fun putData(){
         detail_title.text = placeItem.title
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
@@ -107,6 +110,7 @@ class PlaceDetailActivity : AppCompatActivity(), OnMapReadyCallback {
         hit.text = "조회수 : "+placeItem.readcount.toString()+"회 "
     }
 
+    //즐겨찾기 된 장소였는지 확인
     private fun checkDuplicate(item: Item){
         GlobalScope.launch(Dispatchers.IO) {
             if(itemDao.exist(item.title.toString())){
@@ -123,7 +127,7 @@ class PlaceDetailActivity : AppCompatActivity(), OnMapReadyCallback {
         }
 
     }
-
+//여행지 즐겨찾기 추가 기능
     private fun insertData(item: Item){
         if (!checkStar) {
             GlobalScope.launch(Dispatchers.IO) {
@@ -151,6 +155,7 @@ class PlaceDetailActivity : AppCompatActivity(), OnMapReadyCallback {
         }
     }
 
+    //전화 걸기
     private fun dialPhoneNumber(phoneNumber: String) {
         val intent = Intent(Intent.ACTION_DIAL).apply {
             data = Uri.parse("tel:$phoneNumber")
@@ -160,10 +165,9 @@ class PlaceDetailActivity : AppCompatActivity(), OnMapReadyCallback {
         }
     }
 
+    //해당 위치를 지도에 표시하는 기능
     override fun onMapReady(p0: NaverMap) {
         val marker = Marker()
-//        val cameraUpdate = CameraUpdate.scrollTo(LatLng(lat, lot))
-//        p0.moveCamera(cameraUpdate)
         p0.cameraPosition = CameraPosition(LatLng(lat, lot), 16.0)
         marker.position = LatLng(lat, lot)
         marker.map = p0
