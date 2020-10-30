@@ -3,6 +3,7 @@ package com.example.dkdus.triptonature.ui
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.Editable
 import android.util.Log
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -94,7 +95,7 @@ class CommentActivity : AppCompatActivity() {
             val UpdateCmt: MutableMap<String, Any> = HashMap()
             UpdateCmt["/$placeId/$key"] = commentList
             databaseReference.updateChildren(UpdateCmt)
-            comment_tv.text = ""
+            comment_tv.text = null
         }
     }
 
