@@ -1,6 +1,5 @@
 package com.example.dkdus.triptonature.adapter
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -19,7 +18,7 @@ class MyRecyclerAdapter(
 )
     : RecyclerView.Adapter<RecyclerView.ViewHolder>(), Filterable {
 
-    public var mDatalist: MutableList<Item?> = Datalist.toMutableList()
+    var mDatalist: MutableList<Item?> = Datalist.toMutableList()
     var mfragment : Fragment = frag
 
     fun addPost(dataList: MutableList<Item>){

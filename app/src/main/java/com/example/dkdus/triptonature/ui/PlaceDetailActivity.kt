@@ -16,6 +16,7 @@ import com.example.dkdus.triptonature.R
 import com.example.dkdus.triptonature.database.AppDatabase
 import com.example.dkdus.triptonature.database.ItemDao
 import com.example.dkdus.triptonature.model.place_material.Item
+import com.example.dkdus.triptonature.ui.login.RegistActivity
 import com.naver.maps.geometry.LatLng
 import com.naver.maps.map.*
 import com.naver.maps.map.overlay.Marker
@@ -82,16 +83,10 @@ class PlaceDetailActivity : AppCompatActivity(), OnMapReadyCallback {
         btn_star.setOnClickListener{
             insertData(placeItem)
         }
-
-        btn_share.setOnClickListener {
-            var url = "https://www.google.co.kr/maps/@$lat,$lot"
-            val sendIntent = Intent().apply {
-                action = Intent.ACTION_SEND
-                putExtra(Intent.EXTRA_TEXT, url)
-                type = "text/plain"
-            }
-            val shareIntent = Intent.createChooser(sendIntent, null)
-            startActivity(shareIntent)
+        btn_talk.setOnClickListener {
+            val intent = Intent(this, CommentActivity::class.java)
+            intent.putExtra("PlaceId",placeItem.title)
+            startActivity(intent)
         }
     }
 

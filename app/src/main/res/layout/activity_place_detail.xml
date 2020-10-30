@@ -79,13 +79,13 @@
             />
 
         <Button
-            android:id="@+id/btn_share"
+            android:id="@+id/btn_talk"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:background="#00000000"
-            android:drawableTop="@drawable/ic_baseline_share_24"
-            android:text="공유" />
+            android:drawableTop="@drawable/ic_baseline_textsms_24"
+            android:text="리뷰" />
     </LinearLayout>
 
     <View
@@ -166,13 +166,16 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:layout_marginTop="8dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginBottom="150dp"
-        android:text="개요"
+        android:layout_marginEnd="15dp"
+        android:layout_marginBottom="40dp"
+        android:text="상세한 정보들~~"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/hit" />
+        app:layout_constraintTop_toBottomOf="@+id/hit" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
 </ScrollView>
