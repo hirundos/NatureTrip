@@ -113,7 +113,7 @@ class PlaceDetailActivity : AppCompatActivity(), OnMapReadyCallback {
                 placeItem.id = itemDao.getId()
                 btn_star.setCompoundDrawablesWithIntrinsicBounds(
                     0,
-                    R.drawable.ic_baseline_star2_24,
+                    R.drawable.ic_baseline_star_24,
                     0,
                     0
                 )
@@ -131,7 +131,7 @@ class PlaceDetailActivity : AppCompatActivity(), OnMapReadyCallback {
             }
             btn_star.setCompoundDrawablesWithIntrinsicBounds(
                 0,
-                R.drawable.ic_baseline_star2_24,
+                R.drawable.ic_baseline_star_24,
                 0,
                 0
             )
